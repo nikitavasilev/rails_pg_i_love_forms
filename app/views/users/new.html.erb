@@ -1,0 +1,51 @@
+<p class="text-center margin-header">Visually, the three forms bellow looks the same, but in reality they all works differentely,
+you can check the code on <a href="https://github.com/nikitavasilev/rails_pg_i_love_forms">Github</a>.</p>
+
+<!-- Classic HTML form -->
+<h2 class="text-center margin-header">Classic <i>HTML</i> Form</h2>
+<div class="container margin-header-footer">
+  <form action="/users" method="POST">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <label for="username">Username</label>
+    <input type="text" name="username" placeholder="Your username..">
+    <label for="email">Email</label>
+    <input type="text" name="email" placeholder="Your email..">
+    <label for="bio">Bio</label>
+    <textarea name="bio" placeholder="Write something.." style="height:200px"></textarea>
+    <input type="submit" value="Submit">
+  </form>
+</div>
+<!-- End of Classic HTML form -->
+<hr>
+<!-- Helpers form_tag form -->
+<h2 class="text-center margin-header">Helpers: <i>form_tag</i> Form</h2>
+<div class="container margin-header-footer">
+	<%= form_tag url_for(action: 'create'), method: "post" do %>
+		<%= label_tag 'Username' %>
+		<%= text_field_tag 'username', nil, placeholder: "Your username..." %>
+		<br /> <br />
+		<%= label_tag 'email' %>
+		<%= text_field_tag 'email', nil, placeholder: "Your email..." %>
+		<br /> <br />
+		<%= label_tag 'Bio' %>
+		<%= text_area_tag 'bio', nil, placeholder: "Write something...", size: "60x12" %>
+		<br /> <br />
+		<%= submit_tag "Submit" %>
+	<% end %>
+</div>
+<!-- End of Helpers form_tag form -->
+<hr>
+<!-- Helpers form_for form -->
+<h2 class="text-center margin-header">Helpers: <i>form_for</i> Form</h2>
+<div class="container margin-header">
+	<%= form_for @user, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
+		<%= f.label :username %><br />
+		<%= f.text_field :username, placeholder: "Your username.." %>
+		<%= f.label :email %><br />
+		<%= f.text_field :email, placeholder: "Your email.." %>		
+		<%= f.label :bio %><br />
+		<%= f.text_area :bio, placeholder: "Write something...", size: "60x12" %>
+		<%= f.submit "Submit" %>
+	<% end %>
+</div>
+<!-- End of Helpers form_for form -->
