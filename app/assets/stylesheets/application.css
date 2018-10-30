@@ -73,5 +73,6 @@ input[type=submit]:hover {
 
 hr {
     background-color: white;
+    opacity: 0.6;
     height: 20px;
 }
